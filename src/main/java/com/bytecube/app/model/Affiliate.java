@@ -5,29 +5,36 @@
  */
 package com.bytecube.app.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 /**
  *
  * @author hp
  */
+
 @Data
 @Entity
-@Table(name = "affiliates")
-public class Affiliate extends DateAudit{
-    
+@Table(name = "affiliates", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "affiliateCode"
+        })
+})
+public class Affiliate extends UserDateAudit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "affiliate_name", length = 60)
-    private String affiliateName; 
-    
+    @Column(name = "affiliate_Code")
+    private String affiliateCode;
+
+    @Column(name = "affiliate_Name")
+    private String affiliateName;
+
+    @Column(name = "affiliate_Desc")
+    private String affiliateDesc;
 }
+

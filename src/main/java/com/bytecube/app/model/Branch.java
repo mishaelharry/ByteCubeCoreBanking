@@ -5,38 +5,47 @@
  */
 package com.bytecube.app.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 /**
  *
  * @author hp
  */
+
 @Data
 @Entity
-@Table(name = "branches")
-public class Branch extends DateAudit {
-    
+@Table(name = "branches", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "branchCode"
+        })
+})
+public class Branch extends UserDateAudit {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-    
-    @Column(name = "branch_code", length = 60)
+
+    @Column(name = "branch_Code")
     private String branchCode;
-    
-    @Column(name = "branch_name", length = 60)
+
+    @Column(name = "branch_Name")
     private String branchName;
-    
-    @Column(name = "branch_address", length = 60)
+
+    @Column(name = "branch_Address")
     private String branchAddress;
 
-    public Branch() {
-    }
-    
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @Column(name = "affiliate")
+    private Affiliate affiliate;
+
+
 }
