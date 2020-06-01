@@ -1,0 +1,50 @@
+server:
+    port: 5000
+    servlet: 
+        context-path: /bytecube
+
+file:
+    upload-dir: C:/bytecube/uploads
+  
+spring:
+    cloud:
+        config.enabled: false
+    datasource:
+        url: jdbc:mysql://127.0.0.1:3306/bytecube_db?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        username: root
+        password: 
+        intialization-mode: always
+    jpa:
+        hibernate:
+            ddl-auto: update
+    servlet:
+        multiple:
+            enabled: true
+            file-size-threshold: 100KB
+            max-file-size: 200MB
+            max-request-size: 215MB
+       
+logging:
+    level:
+        org.springframework: ERROR
+        org.hibernate.SQL: DEBUG
+        com.cititrust.app: DEBUG
+    pattern:
+        console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+        file: "%d %p %c{1.} [%t] %m%n"
+    file: application.log
+
+app:
+    time.zone: Africa/Lagos
+    default:
+        password: se3cret9  
+    jwt:
+        secret: 83ueu83838ee938eu838
+        expiration: 604800000
+    admin:
+        username: super.admin@cititrustholdings.com
+        password: 123456
+        rolename: SUPER_ADMIN
+    mail:
+        noreply: noreply@cititrustholdings.com
+    baseurl: http://localhost:3000/
